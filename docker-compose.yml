@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  golang_vue_app_backend:
+    container_name: golang_vue_app_backend
+    build: ./golang
+    ports:
+      - 80:80
+    tty: true
+    volumes:
+      - ./app:/go/src/app
+    networks:
+      - golang_vue_app_network
+
+  golang_vue_app_db:
+    container_name: golang_vue_app_db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    tty: true
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ='Asia/Tokyo'
+    volumes:
+      - ./mysql:/etc/mysql/mysql.conf.d
+      - golang_vue_app_data:/var/lib/mysql
+
+volumes:
+  golang_vue_app_data:
+
+networks:
+  golang_vue_app_network:
+    external: true
