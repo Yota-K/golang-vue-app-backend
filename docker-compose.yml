@@ -7,6 +7,11 @@ services:
     ports:
       - 80:80
     tty: true
+    environment:
+      - MYSQL_DATABASE_HOST=${MYSQL_DATABASE_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./app:/go/src/app
     networks:
