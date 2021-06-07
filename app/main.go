@@ -1,16 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"github.com/gin-gonic/gin"
+	"github.com/Yota-K/golang-vue-app-backend/database"
 )
 
 func db_env() {
-	fmt.Println("DB_HOST:", os.Getenv("MYSQL_DATABASE_HOST"))
-	fmt.Println("DB_NAME:", os.Getenv("MYSQL_DATABASE"))
-	fmt.Println("DB_USER:", os.Getenv("MYSQL_USER"))
-	fmt.Println("DB_PASS:", os.Getenv("MYSQL_PASSWORD"))
+	database.Database_init()
 }
 
 func main() {
