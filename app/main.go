@@ -15,11 +15,22 @@ func main() {
 
 	r := gin.Default()
 	r.Use(Logger())
+
+	// 標準的なリクエストの例
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
+
+	// パスパラメータの例
+	r.GET("/user/:id", func(c *gin.Context) {
+		id:= c.Param("id")
+		c.JSON(200, gin.H{
+			"user_id": id,
+		})
+	})
+
 	r.Run(":80") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
