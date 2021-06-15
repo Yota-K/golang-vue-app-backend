@@ -9,6 +9,8 @@ type Formatter struct {
 	logrus.Formatter
 }
 
+type Fields map[string]interface{}
+
 // ログのフォーマットを指定
 func (f Formatter) Format(e *logrus.Entry) ([]byte, error) {
 	const Location = "Asia/Tokyo"
@@ -27,8 +29,6 @@ func init() {
 	}})
 }
 
-func InfoLog(message, path string) {
-	logrus.WithFields(logrus.Fields{
-		"path": path,
-	}).Info(message)
+func InfoLog(fields Fields, message string) {
+	logrus.WithFields(logrus.Fields(fields)).Info(message)
 }

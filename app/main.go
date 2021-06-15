@@ -36,9 +36,9 @@ func main() {
 
 func Logger() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		path := c.Request.URL.Path
-		log.InfoLog("APIの実行始めます。", path)
+		path, method := c.Request.URL.Path, c.Request.Method
+		log.InfoLog(log.Fields{"path": path, "method": method}, "APIの実行始めます。")
 		c.Next()
-		log.InfoLog("APIの実行終わります。", path)
+		log.InfoLog(log.Fields{"path": path, "method": method}, "APIの実行終わります。")
 	}
 }
