@@ -6,12 +6,8 @@ import (
 	"github.com/Yota-K/golang-vue-app-backend/log"
 )
 
-func db_env() {
-	database.Database_init()
-}
-
 func main() {
-	db_env()
+	database.Init()
 
 	r := gin.Default()
 	r.Use(Logger())

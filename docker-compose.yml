@@ -14,8 +14,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./app:/go/src/app
-    networks:
-      - golang_vue_app_network
 
   golang_vue_app_db:
     container_name: golang_vue_app_db
@@ -35,7 +33,3 @@ services:
 
 volumes:
   golang_vue_app_data:
-
-networks:
-  golang_vue_app_network:
-    external: true
