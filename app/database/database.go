@@ -3,13 +3,14 @@ package database
 import (
 	"fmt"
 	"os"
+	"database/sql"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var (
-	db *gorm.DB
+	Db *sql.DB
 	er error
 )
 
@@ -27,13 +28,10 @@ func Init() {
 		MYSQL_DATABASE,
 	)
 	fmt.Println(CONNECT)
-	db, er = gorm.Open(mysql.Open(CONNECT), &gorm.Config{})
-	fmt.Printf("DBの接続に成功しました: %p", db)
+	connectDb, er := gorm.Open(mysql.Open(CONNECT), &gorm.Config{})
 	if er != nil {
 		panic(er)
 	}
-}
-
-func GetDb() *gorm.DB {
-	return db
+	Db, er = connectDb.DB()
+	fmt.Println("変数の中身: ", Db)
 }

@@ -8,6 +8,7 @@ import (
 
 func main() {
 	database.Init()
+	defer database.Db.Close()
 
 	r := gin.Default()
 	r.Use(Logger())
